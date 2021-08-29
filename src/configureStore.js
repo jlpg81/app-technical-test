@@ -1,7 +1,4 @@
-import {
-  applyMiddleware,
-  createStore,
-} from 'redux';
+import {applyMiddleware, createStore} from 'redux';
 import thunk from 'redux-thunk';
 import lodash from 'lodash';
 import createSagaMiddleware from 'redux-saga';
@@ -13,8 +10,7 @@ import {
   getCachedState,
 } from './middlewares/AsyncStorageMiddleware';
 
-const blacklistedKeys = [
-];
+const blacklistedKeys = [];
 
 export default async function () {
   const cachedState = lodash.omit(await getCachedState(), blacklistedKeys);

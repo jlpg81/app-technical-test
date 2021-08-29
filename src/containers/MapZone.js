@@ -1,6 +1,7 @@
-import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {StyleSheet, View} from 'react-native';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
+import Markers from './Markers';
 
 export default function MapZone() {
   return (
@@ -13,8 +14,9 @@ export default function MapZone() {
           longitude: 2.1686,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
-        }}
-      />
+        }}>
+        <Markers />
+      </MapView>
     </View>
   );
 }

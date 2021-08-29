@@ -1,19 +1,10 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {SafeAreaView, StyleSheet, View, Text, StatusBar} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
+import Deck from '../containers/Deck';
 import MapZone from '../containers/MapZone';
 
 export default function App() {
-  useEffect(() => {
-    const data = fetch('https://lambda.rideyego.com/technical-test', {
-      headers: {
-        'x-api-key': 'qxECK0jBFkLEk4glKDHx3Z88mC11mUfxq7NMR2EY',
-      },
-    })
-      .then((response) => response.json())
-      .then((response) => console.log(response));
-  }, []);
-
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -24,7 +15,7 @@ export default function App() {
         <View style={styles.mapContainer}>
           <MapZone />
         </View>
-        <Text>Hi</Text>
+        <Deck />
       </SafeAreaView>
     </>
   );
