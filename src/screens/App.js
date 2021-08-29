@@ -3,8 +3,10 @@ import {SafeAreaView, StyleSheet, View, Text, StatusBar} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import Deck from '../containers/Deck';
 import MapZone from '../containers/MapZone';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default function App() {
+  AsyncStorage.clear();
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -36,7 +38,5 @@ const styles = StyleSheet.create({
   mapContainer: {
     width: '100%',
     height: '80%',
-
-    backgroundColor: 'red',
   },
 });

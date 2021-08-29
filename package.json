@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.12.1",
+    "geolib": "^3.3.1",
     "lodash": "^4.17.21",
     "prop-types": "^15.7.2",
     "react": "17.0.2",
