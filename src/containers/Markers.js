@@ -37,6 +37,14 @@ export default function Markers() {
       .then((response) => {
         const theArray = [
           {
+            battery: 0,
+            id: 0,
+            lat: 41.396287,
+            lng: 2.141957,
+            name: 'Zero',
+            status: 0,
+          },
+          {
             battery: 1,
             id: 1,
             lat: 41.396287,
@@ -45,16 +53,16 @@ export default function Markers() {
             status: 0,
           },
           {
-            battery: 0,
-            id: 0,
+            battery: 2,
+            id: 2,
             lat: 41.396287,
             lng: 1.131957,
-            name: 'Zero',
+            name: 'Two',
             status: 0,
           },
         ];
         // here we can update the array...
-        const theNewArray = calculateDistanceArray(origin, theArray);
+        const theNewArray = calculateDistanceArray(origin, response);
 
         dispatch({
           type: 'create_vehicle_array',

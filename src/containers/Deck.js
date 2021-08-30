@@ -1,29 +1,50 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {useStore} from 'react-redux';
+import {useDispatch, useStore} from 'react-redux';
 
 export default function Deck() {
+  const dispatch = useDispatch();
+  const store = useStore();
+
   const [number, setNumber] = useState(0);
-  store = useStore();
-  console.log('deck.js global state', store?.getState());
-  console.log(
-    'deck.js scooterArray',
-    store.getState()?.vehicleArray.vehicleArray,
-  );
-  const [scooter, setScooter] = useState({
-    vehicles: store.getState()?.vehicleArray.vehicleArray[number],
-  });
+  const [scooter, setScooter] = useState();
+
+  useEffect(() => {
+    dispatch({
+      type: 'add',
+      payload: store.getState()?.vehicleArray.vehicleArray[0],
+    });
+    setScooter({
+      vehicles: store.getState()?.vehicleArray.vehicleArray[number],
+    });
+  }, []);
 
   store.subscribe(() => {
+    const newId = () => {
+      const num = store
+        .getState()
+        ?.vehicleArray.vehicleArray.indexOf(
+          store.getState()?.vehicles.vehicles,
+        );
+      if (num == -1) {
+        return 0;
+      }
+      return num;
+    };
+
+    setNumber(newId());
     setScooter(store.getState()?.vehicles);
   });
 
   const previousHandler = () => {
-    console.log('pressing previous');
     if (number > 0) {
       setNumber(number - 1);
       setScooter({
         vehicles: store.getState()?.vehicleArray.vehicleArray[number - 1],
+      });
+      dispatch({
+        type: 'add',
+        payload: store.getState()?.vehicleArray.vehicleArray[number - 1],
       });
     } else {
       console.log('this is the closest bike!');
@@ -31,14 +52,20 @@ export default function Deck() {
   };
 
   const nextHandler = () => {
-    console.log('pressing next');
+    console.log('next');
     if (
+      typeof store.getState()?.vehicleArray.vehicleArray[number + 1] !==
+        'undefined' &&
       store.getState()?.vehicleArray.vehicleArray[number + 1].distance <=
-      1200000
+        1200000
     ) {
       setNumber(number + 1);
       setScooter({
         vehicles: store.getState()?.vehicleArray.vehicleArray[number + 1],
+      });
+      dispatch({
+        type: 'add',
+        payload: store.getState()?.vehicleArray.vehicleArray[number + 1],
       });
     } else {
       console.log('next bike too far away!');
